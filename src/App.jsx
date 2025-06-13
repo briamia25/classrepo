@@ -6,9 +6,9 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 // Components
 import AboutUs from "./components/AboutUs";
-import AdoptionForm from "./components/AdoptionForm";
-import ApplicationDetail from "./components/ApplicationDetail";
-import Applications from "./components/Applications";
+//import AdoptionForm from "./components/AdoptionForm";
+//import ApplicationDetail from "./components/ApplicationDetail";
+//import Applications from "./components/Applications";
 import Confirmation from "./components/Confirmation";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -29,8 +29,6 @@ function App() {
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/error" element={<Error />} />
           <Route path="/pets" element={<Pets />} />
-          <Route path="/applications" element={<Applications />} />
-          <Route path="/applications/:id" element={<ApplicationDetail />} />
           <Route path="*" element={<div className='home'><h2>Page Not Found</h2></div>} />
         </Routes>
       </main>
