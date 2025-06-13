@@ -22,7 +22,7 @@ export default function useGetPets() {
                         species: 'Dog',
                         age: '3',
                         dateEntered: '2025-06-01',
-                        image: 'https://via.placeholder.com/150',
+                        image: 'https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     },
                     {
                         petId: '2',
