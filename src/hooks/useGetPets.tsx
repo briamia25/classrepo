@@ -30,7 +30,7 @@ export default function useGetPets() {
                         species: 'Cat',
                         age: '2',
                         dateEntered: '2025-06-03',
-                        image: 'https://via.placeholder.com/150',
+                        image: 'https://images.pexels.com/photos/2071882/pexels-photo-2071882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     },
                 ];
                 setPets(dummyPets);

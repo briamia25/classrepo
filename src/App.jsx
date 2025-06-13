@@ -25,7 +25,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/adopt" element={<AdoptionForm />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/error" element={<Error />} />
           <Route path="/pets" element={<Pets />} />
