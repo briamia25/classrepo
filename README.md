@@ -53,6 +53,6 @@ GeneratePresignedUrlLambda: Creates a secure, temporary pre-signed URL for acces
 
 StateMachine: Orchestrates these Lambda functions in a sequential workflow, ensuring the report generation process is reliable and automated.
 
-TriggerSNS: Publishes the pre-signed URL to an SNS topic (EmailReport), which then sends an email notification to a specified address (Briagranado@outlook.com in this template), providing stakeholders with direct access to the report.
+TriggerSNS: Publishes the pre-signed URL to an SNS topic (EmailReport), which then sends an email notification to a specified address, providing stakeholders with direct access to the report.
 
 CreateReportLambda: Acts as an API trigger to initiate the Step Functions state machine, allowing users to request a report generation on demand.
