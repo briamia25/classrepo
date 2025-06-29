@@ -1,4 +1,4 @@
-Pet Shelter Application
+Pet Shelter Application:
 This project implements the backend infrastructure for a pet shelter website, supporting the seamless management of pet listings, adoption applications, and user engagement. The architecture leverages AWS Amplify for frontend hosting and a robust suite of AWS serverless services for the backend, all defined using AWS Serverless Application Model (SAM) template. 
 
 Core Technologies
