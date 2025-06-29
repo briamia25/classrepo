@@ -1,44 +1,65 @@
 Pet Shelter Application
+This project implements the backend infrastructure for a pet shelter website, supporting the seamless management of pet listings, adoption applications, and user engagement. The architecture leverages AWS Amplify for frontend hosting and a robust suite of AWS serverless services for the backend, all defined using AWS Serverless Application Model (SAM) template. 
 
-This project establishes the backend infrastructure for a pet shelter website, enabling efficient management of pet listings, adoption applications, and user interactions. The architecture leverages AWS Amplify for frontend hosting and a comprehensive suite of AWS serverless services for the backend, defined entirely through a SAM template.
+Core Technologies
+AWS Serverless Application Model (SAM) – Defines the serverless infrastructure as code for consistent and repeatable deployments.
 
-Core Technologies Utilized
-- AWS Serverless Application Model (SAM): Defines the entire serverless application, ensuring infrastructure as code (IaC) principles.
-- AWS Lambda: Event-driven, serverless compute functions handling all backend logic.
-- Amazon DynamoDB: Fully managed NoSQL databases for highly available and scalable data storage.
-- Amazon API Gateway: Creates secure, scalable, and performant RESTful APIs for frontend interaction.
-- Amazon Cognito: Manages user authentication and authorization, providing secure access to protected API endpoints.
-- AWS Step Functions: Orchestrates complex, multi-step workflows for automated tasks like report generation.
-- Amazon SNS (Simple Notification Service): Facilitates sending notifications, specifically for automated email reports.
+AWS Lambda – Handles backend logic using event-driven serverless compute functions.
 
-Backend Architecture Highlights
-1. Data Persistence (DynamoDB)
-The backend features three core DynamoDB tables, each designed for specific data entities:
-- PetsTable: Stores comprehensive details about available pets (e.g., name, breed, age, status).
-- AdoptionsTable: Manages records of adoption applications, including applicant details and application status.
-- PetsInterestTable: A new addition to track user interest in specific pets, enabling analytics and reporting on pet popularity.
+Amazon DynamoDB – Provides highly available, scalable NoSQL data storage.
 
-2. RESTful API Endpoints (API Gateway & Lambda)
-A central API Gateway (PetsAPI) exposes various endpoints, secured with CORS for cross-origin requests and integrated with Lambda functions for backend logic:
-- GET /pets: Retrieves a list of all available pets.
-- GET /adoptions: Fetches all adoption records.
-- GET /adoptions/{id}: Retrieves a specific adoption record by ID (authenticated access).
-- POST /adoptions: Allows users to submit new adoption applications.
+Amazon API Gateway – Powers secure, scalable RESTful APIs for frontend-backend integration.
 
-3. User Authentication and Authorization (Cognito)
-AWS Cognito is integrated to provide robust user management:
-- CognitoUserPool: Configured to manage user registration, sign-in, and account recovery with email as the primary username attribute and strong password policies.
-- CognitoUserPoolClient: Enables client applications (e.g., the Amplify-hosted frontend) to interact with the user pool, supporting OAuth flows and specific scopes.
-- CognitoUserPoolDomain: Provides a hosted UI for user sign-up/sign-in, integrated with the API Gateway for authorizing protected routes (e.g., /adoptions and /adoptions/{id}).
+Amazon Cognito – Manages user authentication and authorization to protect API endpoints.
 
-4. Automated Reporting Workflow (Step Functions & SNS)
-A automated reporting system is implemented using AWS Step Functions:
-- GenerateReportDataLambda: Gathers data on pet interest and adoption trends from PetsTable and PetsInterestTable.
-- GenerateHTMLLambda: Transforms the gathered data into a formatted HTML report.
-- GeneratePresignedUrlLambda: Creates a secure, temporary pre-signed URL for accessing the generated HTML report 
+AWS Step Functions – Orchestrates complex workflows like automated report generation.
 
-StateMachine: Orchestrates these Lambda functions in a sequential workflow, ensuring the report generation process is reliable and automated.
+Amazon SNS (Simple Notification Service) – Delivers notifications such as email reports.
 
-TriggerSNS: Publishes the pre-signed URL to an SNS topic (EmailReport), which then sends an email notification to a specified address, providing stakeholders with direct access to the report.
+Backend Architecture
+Data Persistence (DynamoDB)
+The backend uses three dedicated DynamoDB tables:
 
-CreateReportLambda: Acts as an API trigger to initiate the Step Functions state machine, allowing users to request a report generation on demand.
+PetsTable – Stores details of pets (e.g., name, breed, age, status).
+
+AdoptionsTable – Records adoption applications, including applicant info and status.
+
+PetsInterestTable – Tracks user interest in specific pets for analytics and reporting.
+
+RESTful API (API Gateway + Lambda)
+A centralized API Gateway (PetsAPI) exposes secure, CORS-enabled endpoints, each backed by Lambda functions:
+
+GET /pets – Retrieve all available pets.
+
+GET /adoptions – Fetch all adoption records.
+
+GET /adoptions/{id} – Retrieve a specific adoption record (requires authentication).
+
+POST /adoptions – Submit a new adoption application.
+
+User Authentication (Cognito)
+Integrated AWS Cognito handles user management and API access control:
+
+User Pool – Supports registration, login, and account recovery with email as the primary ID and strong password policies.
+
+User Pool Client – Connects frontend apps via OAuth flows and scopes.
+
+User Pool Domain – Provides a hosted UI for sign-up/sign-in and protects routes like /adoptions/{id}.
+
+Automated Reporting (Step Functions + SNS)
+A fully automated reporting workflow generates adoption and interest reports:
+
+GenerateReportDataLambda – Aggregates data from PetsTable and PetsInterestTable.
+
+GenerateHTMLLambda – Converts data into a formatted HTML report.
+
+GeneratePresignedUrlLambda – Produces a secure, temporary URL to access the report.
+
+State Machine – Coordinates the reporting steps in sequence for reliability.
+
+TriggerSNS – Sends the report URL via email through an SNS topic (EmailReport).
+
+CreateReportLambda – API-triggered Lambda to start the report generation workflow on demand.
+
+
+
