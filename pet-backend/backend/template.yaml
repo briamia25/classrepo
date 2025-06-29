@@ -208,7 +208,7 @@ Resources:
         - openid
         - aws.cognito.signin.user.admin
       CallbackURLs:
-        - https://d84l1y8p4kdic.cloudfront.net/ # REPLACE WITH PETS APP CLOUD9 PREVIEW DOMAIN URL
+        - https://d84l1y8p4kdic.cloudfront.net # REPLACE WITH PETS APP CLOUD9 PREVIEW DOMAIN URL
       LogoutURLs:
         - https://d84l1y8p4kdic.cloudfront.net/ # REPLACE WITH PETS APP CLOUD9 PREVIEW DOMAIN URL
       SupportedIdentityProviders:

@@ -4,17 +4,17 @@ import os
 import sys
 from datetime import date
 
-# Create a session object
-session = boto3.session.Session()
-
 # Get the current AWS region
-aws_region = session.region_name
+desired_aws_region = "us-east-1"
+
+# Create a session object
+session = boto3.session.Session(region_name=desired_aws_region)
 
 # Create an S3 client
-s3 = boto3.client("s3")
+s3 = session.client("s3")
 
 # Get the AWS account ID
-sts = boto3.client("sts")
+sts = session.client("sts")
 account_id = sts.get_caller_identity()["Account"]
 
 # Get the current date in YYYYMMDD format
@@ -24,12 +24,12 @@ today = date.today().strftime("%Y%m%d")
 bucket_name = f"report-pets-interest-{account_id}-{today}"
 
 # Create the S3 bucket
-if aws_region == "us-east-1":
+if desired_aws_region == "us-east-1":
     bucket_response = s3.create_bucket(Bucket=bucket_name)
 else:
     bucket_response = s3.create_bucket(
         Bucket=bucket_name,
-        CreateBucketConfiguration={"LocationConstraint": aws_region},
+        CreateBucketConfiguration={"LocationConstraint": desired_aws_region},
     )
 
 

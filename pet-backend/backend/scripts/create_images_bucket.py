@@ -4,14 +4,14 @@ import os
 import sys
 from datetime import date
 
-# Create a session object
-session = boto3.session.Session()
+#Define AWS Region
+desired_aws_region = 'us-east-1'
 
-# Get the current AWS region
-aws_region = session.region_name
+# Create a session object
+session = boto3.session.Session(region_name=desired_aws_region)
 
 # Create an S3 client
-s3 = boto3.client("s3")
+s3 = session.client("s3")
 
 # Get the AWS account ID
 sts = boto3.client("sts")
@@ -24,12 +24,13 @@ today = date.today().strftime("%Y%m%d")
 bucket_name = f"images-{account_id}-{today}"
 
 # Create the S3 bucket
-if aws_region == "us-east-1":
+if desired_aws_region == "us-east-1":
     bucket_response = s3.create_bucket(Bucket=bucket_name)
+    CreateBucketConfiguration={"LocationConstraint": "US"}
 else:
     bucket_response = s3.create_bucket(
         Bucket=bucket_name,
-        CreateBucketConfiguration={"LocationConstraint": aws_region},
+        CreateBucketConfiguration={"LocationConstraint": desired_aws_region},
     )
 
 
@@ -49,7 +50,7 @@ public_access_block_response = s3.put_public_access_block(
 
 # print(f"Block public access turned off for {bucket_name}.")
 # Add all product images to the newly created S3 bucket
-images_folder = os.path.expanduser('C:/Users/Owner/Documents/pets/pet-backend/pet-shelter-client/src/assets')
+images_folder = os.path.expanduser('C:/Users/Owner/Documents/pets/pet-shelter/pet-backend/pet-shelter-client/src/assets')
 for filename in os.listdir(images_folder):
     file_path = os.path.join(images_folder, filename)
     if os.path.isfile(file_path):
@@ -80,4 +81,5 @@ bucket_policy = json.dumps(bucket_policy)
 bucket_policy_response = s3.put_bucket_policy(Bucket=bucket_name, Policy=bucket_policy)
 
 # print(f"Bucket policy applied to {bucket_name}.")
-print(f"S3 PET IMAGES BUCKET URL: https://{bucket_name}.s3.{aws_region}.amazonaws.com/images")
+print(f"S3 PET IMAGES BUCKET URL: https://{bucket_name}.s3.{desired_aws_region}.amazonaws.com/images")
+
