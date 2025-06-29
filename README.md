@@ -1,8 +1,6 @@
 🐾 Pet Shelter Application
 
-
-
-A serverless backend infrastructure for a pet shelter website, enabling efficient management of pet listings, adoption applications, and user engagement. Built with AWS Amplify and a full suite of AWS serverless services, defined using AWS SAM for infrastructure as code.
+Summary: A serverless backend infrastructure for a pet shelter website, enabling efficient management of pet listings, adoption applications, and user engagement. Built with AWS Amplify and a full suite of AWS serverless services, defined using AWS SAM for infrastructure as code.
 
 🚀 Features
 ✅ Manage pet listings and adoptions
