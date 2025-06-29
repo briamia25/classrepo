@@ -1,65 +1,52 @@
-Pet Shelter Application:
-This project implements the backend infrastructure for a pet shelter website, supporting the seamless management of pet listings, adoption applications, and user engagement. The architecture leverages AWS Amplify for frontend hosting and a robust suite of AWS serverless services for the backend, all defined using AWS Serverless Application Model (SAM) template. 
-
-Core Technologies
-AWS Serverless Application Model (SAM) – Defines the serverless infrastructure as code for consistent and repeatable deployments.
-
-AWS Lambda – Handles backend logic using event-driven serverless compute functions.
-
-Amazon DynamoDB – Provides highly available, scalable NoSQL data storage.
-
-Amazon API Gateway – Powers secure, scalable RESTful APIs for frontend-backend integration.
-
-Amazon Cognito – Manages user authentication and authorization to protect API endpoints.
-
-AWS Step Functions – Orchestrates complex workflows like automated report generation.
-
-Amazon SNS (Simple Notification Service) – Delivers notifications such as email reports.
-
-Backend Architecture
-Data Persistence (DynamoDB)
-The backend uses three dedicated DynamoDB tables:
-
-PetsTable – Stores details of pets (e.g., name, breed, age, status).
-
-AdoptionsTable – Records adoption applications, including applicant info and status.
-
-PetsInterestTable – Tracks user interest in specific pets for analytics and reporting.
-
-RESTful API (API Gateway + Lambda)
-A centralized API Gateway (PetsAPI) exposes secure, CORS-enabled endpoints, each backed by Lambda functions:
-
-GET /pets – Retrieve all available pets.
-
-GET /adoptions – Fetch all adoption records.
-
-GET /adoptions/{id} – Retrieve a specific adoption record (requires authentication).
-
-POST /adoptions – Submit a new adoption application.
-
-User Authentication (Cognito)
-Integrated AWS Cognito handles user management and API access control:
-
-User Pool – Supports registration, login, and account recovery with email as the primary ID and strong password policies.
-
-User Pool Client – Connects frontend apps via OAuth flows and scopes.
-
-User Pool Domain – Provides a hosted UI for sign-up/sign-in and protects routes like /adoptions/{id}.
-
-Automated Reporting (Step Functions + SNS)
-A fully automated reporting workflow generates adoption and interest reports:
-
-GenerateReportDataLambda – Aggregates data from PetsTable and PetsInterestTable.
-
-GenerateHTMLLambda – Converts data into a formatted HTML report.
-
-GeneratePresignedUrlLambda – Produces a secure, temporary URL to access the report.
-
-State Machine – Coordinates the reporting steps in sequence for reliability.
-
-TriggerSNS – Sends the report URL via email through an SNS topic (EmailReport).
-
-CreateReportLambda – API-triggered Lambda to start the report generation workflow on demand.
+🐾 Pet Shelter Application
 
 
+
+A serverless backend infrastructure for a pet shelter website, enabling efficient management of pet listings, adoption applications, and user engagement. Built with AWS Amplify and a full suite of AWS serverless services, defined using AWS SAM for infrastructure as code.
+
+🚀 Features
+✅ Manage pet listings and adoptions
+✅ Secure user authentication and authorization
+✅ Automated report generation with email delivery
+✅ Scalable, event-driven serverless architecture
+
+🛠 Tech Stack
+Service	Purpose
+AWS SAM	Infrastructure as Code (IaC) for defining the entire serverless app
+AWS Lambda	Serverless compute for backend logic
+Amazon DynamoDB	NoSQL data storage for pets, adoptions, and user interest
+Amazon API Gateway	RESTful API endpoints for frontend-backend interaction
+Amazon Cognito	User authentication and authorization
+AWS Step Functions	Orchestrates report generation workflows
+Amazon SNS	Sends automated email notifications
+
+🗄 Architecture Overview
+📂 Data Persistence
+PetsTable – Stores pet details (name, breed, age, status)
+
+AdoptionsTable – Tracks adoption applications (applicant info, status)
+
+PetsInterestTable – Captures user interest for analytics
+
+🌐 API Endpoints (API Gateway + Lambda)
+Method	Endpoint	Description	Auth
+GET	/pets	Get list of available pets	Public
+GET	/adoptions	Get all adoption records	Public
+GET	/adoptions/{id}	Get adoption record by ID	Authenticated
+POST	/adoptions	Submit adoption application	Public
+
+🔐 User Authentication (Cognito)
+User Pool: Manages signup, login, and recovery (email-based login, strong password policies)
+
+User Pool Client: Enables OAuth flows for frontend integration
+
+User Pool Domain: Hosted UI for user authentication, linked with protected API routes
+
+📊 Automated Reporting (Step Functions + SNS)
+1️⃣ GenerateReportDataLambda – Gathers data on pet interest/adoption trends
+2️⃣ GenerateHTMLLambda – Formats data into an HTML report
+3️⃣ GeneratePresignedUrlLambda – Creates a temporary secure URL for the report
+4️⃣ State Machine: Orchestrates workflow steps
+5️⃣ TriggerSNS – Publishes URL to SNS topic → sends email to stakeholders
+6️⃣ CreateReportLambda – API-triggered Lambda to start report generation
 
