@@ -11,23 +11,21 @@ Features
 ✅ Automated report generation with email delivery
 ✅ Scalable, event-driven serverless architecture
 
-Tech Stack
-Service	Purpose
-AWS SAM	Infrastructure as Code (IaC) for defining the entire serverless app
-AWS Lambda	Serverless compute for backend logic
-Amazon DynamoDB	NoSQL data storage for pets, adoptions, and user interest
-Amazon API Gateway	RESTful API endpoints for frontend-backend interaction
-Amazon Cognito	User authentication and authorization
-AWS Step Functions	Orchestrates report generation workflows
-Amazon SNS	Sends automated email notifications
+Tech Stack Service	Purpose
+
+-AWS SAM	Infrastructure as Code (IaC) for defining the entire serverless app
+-AWS Lambda	Serverless compute for backend logic
+-Amazon DynamoDB	NoSQL data storage for pets, adoptions, and user interest
+-Amazon API Gateway	RESTful API endpoints for frontend-backend interaction
+-Amazon Cognito	User authentication and authorization
+-AWS Step Functions	Orchestrates report generation workflows
+-Amazon SNS	Sends automated email notifications
 
 Architecture Overview
 📂 Data Persistence
-PetsTable – Stores pet details (name, breed, age, status)
-
-AdoptionsTable – Tracks adoption applications (applicant info, status)
-
-PetsInterestTable – Captures user interest for analytics
+-PetsTable – Stores pet details (name, breed, age, status)
+-AdoptionsTable – Tracks adoption applications (applicant info, status)
+-PetsInterestTable – Captures user interest for analytics
 
 API Endpoints (API Gateway + Lambda)
 Method	Endpoint	Description	Auth
